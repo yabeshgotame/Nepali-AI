@@ -11,25 +11,32 @@
 <body>
     <div class="container">
         <header>
-            <img src="logo.png" alt="आमाको सुझाव लोगो" class="logo">
+            <img src="logo.png" alt="आमाको सुझाव" class="logo">
             <h1>आमाको सुझाव 🤱</h1>
-            <p>तपाईंको नेपाली AI आमा – जीवन, रोजगार, र समस्याको समाधान</p>
+            <p class="subtitle">तपाईंको नेपाली AI आमा – जीवन, रोजगार, र समस्याको समाधान</p>
         </header>
 
-        <div class="chat-box" id="chatBox">
-            <!-- AI responses appear here -->
-            <div class="ai-message">
-                <p>नमस्ते! म तपाईंको आमा जस्तै सुझाव दिने AI हुँ। तपाईंले के सोध्न चाहनुहुन्छ?</p>
+        <div class="chat-container">
+            <div class="chat-box" id="chatBox">
+                <div class="message ai-message">
+                    <p>नमस्ते! म तपाईंको आमा जस्तै सुझाव दिने AI हुँ। तपाईंले के सोध्न चाहनुहुन्छ?</p>
+                </div>
+            </div>
+            
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
         </div>
 
         <div class="input-area">
-            <textarea id="userInput" placeholder="यहाँ लेख्नुहोस्..."></textarea>
-            <button id="voiceBtn">🎤</button>
-            <button id="sendBtn">पठाउनुहोस्</button>
+            <textarea id="userInput" placeholder="यहाँ लेख्नुहोस्..." rows="1"></textarea>
+            <button id="voiceBtn" class="icon-btn" title="आवाज प्रयोग गर्नुहोस्">🎤</button>
+            <button id="sendBtn" class="primary-btn">पठाउनुहोस्</button>
         </div>
     </div>
 
     <script src="script.js"></script>
 </body>
-                  </html>
+                </html>
