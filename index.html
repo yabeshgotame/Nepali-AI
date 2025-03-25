@@ -1,42 +1,568 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>आमाको सुझाव</title>
-    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="logo.png" type="image/png">
+    <title>Neon Birthday Extravaganza</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Press+Start+2P&family=Rubik+Glitch&display=swap');
+        
+        :root {
+            --neon-pink: #ff00ff;
+            --neon-cyan: #00ffff;
+            --neon-green: #00ff00;
+            --neon-orange: #ff9900;
+            --neon-red: #ff0000;
+            --neon-yellow: #ffff00;
+            --neon-purple: #9900ff;
+        }
+        
+        body {
+            background: radial-gradient(circle, #0a0a2a 0%, #000000 100%);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            font-family: 'Press Start 2P', cursive;
+            color: #fff;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+        
+        .container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+            padding: 40px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(30,30,30,0.8) 0%, rgba(10,10,10,0.9) 100%);
+            box-shadow: 0 0 30px var(--neon-pink),
+                        0 0 60px var(--neon-cyan),
+                        inset 0 0 20px rgba(255,255,255,0.1);
+            margin: 20px 0;
+            z-index: 1;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+        }
+        
+        .container:hover {
+            transform: translateY(-5px) rotateX(1deg) rotateY(1deg);
+            box-shadow: 0 0 40px var(--neon-pink),
+                        0 0 80px var(--neon-cyan),
+                        inset 0 0 30px rgba(255,255,255,0.2);
+        }
+        
+        h1 {
+            font-family: 'Rubik Glitch', cursive;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink),
+                         0 0 20px var(--neon-pink),
+                         0 0 30px var(--neon-pink),
+                         0 0 40px var(--neon-purple);
+            font-size: 4rem;
+            margin-bottom: 30px;
+            animation: flicker 1.5s infinite alternate, rainbow 8s linear infinite;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-image: linear-gradient(45deg, 
+                var(--neon-pink), 
+                var(--neon-cyan), 
+                var(--neon-green), 
+                var(--neon-orange));
+            transform: skewY(-2deg);
+            letter-spacing: 2px;
+        }
+        
+        .birthday-person {
+            font-size: 2.5rem;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan),
+                         0 0 20px var(--neon-cyan),
+                         0 0 30px var(--neon-cyan);
+            margin-bottom: 30px;
+            animation: pulse 2s infinite, float 4s ease-in-out infinite;
+            font-family: 'Pacifico', cursive;
+        }
+        
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+            color: #ffffff;
+            text-shadow: 0 0 5px white;
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 3px solid var(--neon-green);
+            border-right: 3px solid var(--neon-purple);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .message::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255,255,255,0.1), 
+                transparent);
+            transform: translateX(-100%);
+            animation: shine 3s infinite;
+        }
+        
+        .neon-btn {
+            background: none;
+            border: 2px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 15px 30px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.1rem;
+            cursor: pointer;
+            text-shadow: 0 0 5px var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green),
+                        inset 0 0 10px var(--neon-green);
+            transition: all 0.4s;
+            margin: 15px;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transform: translateY(0);
+        }
+        
+        .neon-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-green);
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+        }
+        
+        .neon-btn:hover {
+            color: #000;
+            text-shadow: none;
+            box-shadow: 0 0 25px var(--neon-green),
+                       inset 0 0 20px var(--neon-green);
+            transform: translateY(-3px);
+        }
+        
+        .neon-btn:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .cake {
+            font-size: 6rem;
+            margin: 30px 0;
+            text-shadow: 0 0 15px var(--neon-orange),
+                         0 0 30px var(--neon-orange),
+                         0 0 45px var(--neon-red);
+            animation: float 3s ease-in-out infinite, pulse 1.5s infinite alternate;
+            display: inline-block;
+            transform: rotate(0deg);
+            transition: transform 0.3s;
+        }
+        
+        .cake:hover {
+            transform: rotate(10deg) scale(1.1);
+            animation: none;
+        }
+        
+        .balloons {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 60px;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: float-up 15s linear infinite;
+            filter: drop-shadow(0 0 5px currentColor);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 30px;
+            background: rgba(255,255,255,0.5);
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            opacity: 0;
+            z-index: 999;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+        
+        .input-group {
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .neon-input {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid var(--neon-pink);
+            color: #fff;
+            padding: 12px 20px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9rem;
+            margin: 15px 0;
+            width: 80%;
+            max-width: 350px;
+            text-align: center;
+            box-shadow: 0 0 15px var(--neon-pink),
+                        inset 0 0 10px var(--neon-pink);
+            transition: all 0.3s;
+            border-radius: 8px;
+        }
+        
+        .neon-input:focus {
+            outline: none;
+            box-shadow: 0 0 20px var(--neon-pink),
+                       inset 0 0 15px var(--neon-pink);
+            transform: scale(1.02);
+        }
+        
+        .neon-label {
+            display: block;
+            margin-bottom: 15px;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 8px var(--neon-cyan);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+        
+        .signature {
+            margin-top: 50px;
+            font-family: 'Pacifico', cursive;
+            color: var(--neon-orange);
+            text-shadow: 0 0 10px var(--neon-orange);
+            font-size: 2rem;
+            animation: glow 2s ease-in-out infinite alternate, float 4s ease-in-out infinite;
+            position: relative;
+        }
+        
+        .signature::before, .signature::after {
+            content: '✧';
+            position: absolute;
+            color: var(--neon-purple);
+            animation: spin 4s linear infinite;
+        }
+        
+        .signature::before {
+            left: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .signature::after {
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+        }
+        
+        .firework {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px 5px var(--color);
+            animation: explode 1s ease-out forwards;
+            opacity: 0;
+            z-index: 998;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            animation: particle-fall 1.5s ease-out forwards;
+            opacity: 0;
+            z-index: 997;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 10px var(--neon-pink),
+                            0 0 20px var(--neon-pink),
+                            0 0 30px var(--neon-pink),
+                            0 0 40px var(--neon-purple);
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+                opacity: 0.7;
+            }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes float-up {
+            0% { 
+                transform: translateY(100vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { 
+                transform: translateY(-100px) rotate(360deg) scale(1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes glow {
+            from { 
+                text-shadow: 0 0 5px var(--neon-orange),
+                            0 0 10px var(--neon-orange);
+            }
+            to { 
+                text-shadow: 0 0 15px var(--neon-orange),
+                            0 0 30px var(--neon-orange),
+                            0 0 45px var(--neon-red);
+            }
+        }
+        
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        @keyframes shine {
+            to {
+                transform: translateX(100%);
+            }
+        }
+        
+        @keyframes spin {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
+        }
+        
+        @keyframes twinkle {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        
+        @keyframes explode {
+            0% { 
+                transform: scale(0.1);
+                opacity: 0;
+            }
+            50% { 
+                opacity: 1;
+            }
+            100% { 
+                transform: scale(1);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes particle-fall {
+            0% { 
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% { 
+                transform: translate(var(--tx), var(--ty));
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            .birthday-person {
+                font-size: 1.8rem;
+            }
+            .message {
+                font-size: 1rem;
+            }
+            .neon-btn {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+            }
+            .cake {
+                font-size: 4rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <img src="logo.png" alt="आमाको सुझाव" class="logo">
-            <h1>आमाको सुझाव 🤱</h1>
-            <p class="subtitle">तपाईंको नेपाली AI आमा – जीवन, रोजगार, र समस्याको समाधान</p>
-        </header>
-
-        <div class="chat-container">
-            <div class="chat-box" id="chatBox">
-                <div class="message ai-message">
-                    <p>नमस्ते! म तपाईंको आमा जस्तै सुझाव दिने AI हुँ। तपाईंले के सोध्न चाहनुहुन्छ?</p>
-                </div>
-            </div>
-            
-            <div class="typing-indicator" id="typingIndicator">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
+    <div class="stars" id="stars-container"></div>
+    <div class="balloons" id="balloons-container"></div>
+    
+    <div class="container animate__animated animate__zoomIn" id="input-container">
+        <h1 class="animate__animated animate__pulse animate__infinite">Birthday Wishes</h1>
+        
+        <div class="input-group">
+            <label for="name" class="neon-label">Whose birthday is it?</label>
+            <input type="text" id="name" class="neon-input" placeholder="Enter name">
         </div>
-
-        <div class="input-area">
-            <textarea id="userInput" placeholder="यहाँ लेख्नुहोस्..." rows="1"></textarea>
-            <button id="voiceBtn" class="icon-btn" title="आवाज प्रयोग गर्नुहोस्">🎤</button>
-            <button id="sendBtn" class="primary-btn">पठाउनुहोस्</button>
+        
+        <div class="input-group">
+            <label for="month" class="neon-label">Birth Month (1-12)</label>
+            <input type="number" id="month" class="neon-input" min="1" max="12" placeholder="Month (1-12)">
         </div>
+        
+        <div class="input-group">
+            <label for="day" class="neon-label">Birth Day (1-31)</label>
+            <input type="number" id="day" class="neon-input" min="1" max="31" placeholder="Day (1-31)">
+        </div>
+        
+        <button class="neon-btn animate__animated animate__pulse animate__infinite" id="generate-btn">Generate Wishes</button>
     </div>
-
-    <script src="script.js"></script>
-</body>
-                </html>
+    
+    <div class="container animate__animated" id="wishes-container" style="display: none;">
+        <h1 class="animate__animated animate__rubberBand">Happy Birthday!</h1>
+        <div class="birthday-person" id="display-name"></div>
+        <div class="cake">🎂</div>
+        <div class="message" id="birthday-message"></div>
+        <div class="signature">With love, Yabesh</div>
+        <button class="neon-btn" id="back-btn">Back</button>
+    </div>
+    
+    <audio id="birthday-audio" loop>
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-happy-birthday-to-you-2383.mp3" type="audio/mpeg">
+    </audio>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generate-btn');
+            const backBtn = document.getElementById('back-btn');
+            const inputContainer = document.getElementById('input-container');
+            const wishesContainer = document.getElementById('wishes-container');
+            const nameInput = document.getElementById('name');
+            const monthInput = document.getElementById('month');
+            const dayInput = document.getElementById('day');
+            const displayName = document.getElementById('display-name');
+            const birthdayMessage = document.getElementById('birthday-message');
+            const balloonsContainer = document.getElementById('balloons-container');
+            const starsContainer = document.getElementById('stars-container');
+            const audio = document.getElementById('birthday-audio');
+            
+            // Array of birthday messages
+            const messages = [
+                "May your special day be as bright and wonderful as you are! Wishing you endless joy and success!",
+                "Wishing you a day filled with happiness, a year filled with joy, and a life filled with blessings!",
+                "Another year older, wiser, and more awesome! Enjoy your day to the fullest!",
+                "Hope your birthday is as amazing as you are! May all your dreams come true this year!",
+                "Sending you smiles for every moment of your special day! You deserve the very best!",
+                "May all your birthday wishes come true! Here's to another year of great adventures!",
+                "Celebrate this special day with a heart full of joy and a cake full of sweetness! You're amazing!",
+                "Another adventure filled year awaits you. Happy Birthday to someone who deserves the world!"
+            ];
+            
+            // Create stars
+            function createStars() {
+                starsContainer.innerHTML = '';
+                const count = 200;
+                for (let i = 0; i < count; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.width = (Math.random() * 3 + 1) + 'px';
+                    star.style.height = star.style.width;
+                    star.style.setProperty('--duration', (Math.random() * 5 + 3) + 's');
+                    star.style.animationDelay = Math.random() * 5 + 's';
+                    starsContainer.appendChild(star);
+                }
+            }
+            
+            // Create balloons
+            function createBalloons() {
+                balloonsContainer.innerHTML = '';
+                const colors = ['var(--neon-pink)', 'var(--neon-cyan)', 'var(--neon-orange)', 
+                               'var(--neon-green)', 'var(--neon-red)', 'var(--neon-yellow)', 
+                               'var(--neon-purple)'];
+                const emojis = ['🎈', '🎉', '🎊', '🎁', '🎀', '✨', '💖'];
+                
+                for (let i = 0; i < 25; i++) {
+                    const balloon = document.createElement('div');
+                    balloon.className = 'balloon';
+                    balloon.style.left = Math.random() * 100 + '%';
+                    balloon.style.color = colors[Math.floor(Math.random() * colors.length)];
+                    balloon.style.animationDuration = (8 + Math.random() * 12) + 's';
+                    balloon.style.animationDelay = Math.random() * 5 + 's';
+                    balloon.style.width = (40 + Math.random() * 40) + 'px';
+                    balloon.style.height = (50 + Math.random() * 50) + 'px';
+                    balloon.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                    balloonsContainer.appendChild(balloon);
+                }
+            }
+            
+            // Create confetti
+            function createConfetti() {
+                const colors = ['var(--neon-pink)', 'var(--neon-cyan)', 'var(--neon-orange)', 
+                               'var(--neon-green)', 'var(--neon-red)', 'var(--neon-yellow)'];
+                
+                for (let i = 0; i < 150; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.c
